@@ -9,12 +9,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteract
   curl \
   wget \
   git \
+  unzip \
   build-essential \
   zip \
   xz-utils \
   jq \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sfLS https://install-node.vercel.app/18 | bash -s -- -y
 
 # install latest upx 3.96 by wget instead of `apt install upx-ucl`(only 3.95)
 RUN export arch=$(dpkg --print-architecture) && wget --no-check-certificate --progress=dot:mega https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${UPX_VER}-${arch}_linux.tar.xz && \
